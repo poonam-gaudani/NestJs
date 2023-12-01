@@ -1,6 +1,7 @@
-import { Get, Post, Put, Controller, Delete, Param, Query, Body } from '@nestjs/common';
+import { Get, Post, Put, Controller, Delete, Param, Query, Body, ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { Doctors } from './doctors';
 import { DoctorInterface } from './doctors.interface';
+import { doctorDto } from './doctors.dto';
 
 @Controller('Doctor')
 export class DoctorController {
@@ -8,7 +9,7 @@ export class DoctorController {
 
 
     @Post("/add_doctor")
-    addDoctor (@Body() createDocDto: DoctorInterface) : String {
+    addDoctor (@Body(new ValidationPipe()) createDocDto: doctorDto) : String {
         return this.DoctorService.addDoctors(createDocDto);
     }
 
@@ -18,7 +19,7 @@ export class DoctorController {
     }
 
     @Delete("/doctor/:id")
-    removeDoctor (@Param() param, @Query() query) : String {  
+    removeDoctor (@Param('id', ParseIntPipe) param , @Query() query) : String {  
         return this.DoctorService.deleteDoctors();
     }
 

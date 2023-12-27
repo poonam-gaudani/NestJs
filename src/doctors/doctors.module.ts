@@ -1,11 +1,18 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { Doctors } from './doctors';
-import { DoctorController } from './doctors.controller';
-import { isRegistered } from './doctor.middleware';
+
+import { DoctorService } from '../services/doctor.service';
+import { DoctorController } from '../controllers/doctors.controller';
+import { isRegistered } from '../middlewares/doctor.middleware'
+import { MongooseModule } from '@nestjs/mongoose';
+import { Doctor, DoctorSchema } from '../doctor-schema/doctor-schema'
 
 @Module({
-  providers: [Doctors],
-  controllers: [DoctorController]
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost/nest-mongodb-crud'),
+    MongooseModule.forFeature([{ name: Doctor.name, schema: DoctorSchema }])
+  ],
+  controllers: [DoctorController],
+  providers: [DoctorService]
 })
 export class DoctorsModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {

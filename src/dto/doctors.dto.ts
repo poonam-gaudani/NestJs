@@ -1,12 +1,9 @@
-import { IsString, IsInt, IsEmail, MinLength, Max, IsOptional, Matches } from "class-validator"
+import { IsString, IsInt, IsEmail, MinLength, Max, IsOptional, Matches, MaxLength } from "class-validator"
 
-export class doctorDto{
-    @IsInt()
-    id: number;
- 
+export class doctorDto{ 
     @IsString() @MinLength(1, {
         message: `name must $value of $property $constraint1`
-    }) @Max(3, {
+    }) @MaxLength(30, {
         message: `name must $value of $property $constraint1`
     })
     @IsOptional()

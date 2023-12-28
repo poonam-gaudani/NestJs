@@ -10,6 +10,7 @@ export class PasswordService {
     }
 
     async compareHash (plainTextPass: String, hashPassword: String) {
-        return bcrypt.compareHash(plainTextPass, hashPassword);
+        console.log(await bcrypt.compare(plainTextPass, hashPassword))
+        return await bcrypt.compare(plainTextPass, hashPassword);
     }
 }

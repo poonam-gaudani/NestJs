@@ -5,7 +5,7 @@ import { DoctorsModule } from './doctors/doctors.module';
 @Module({
   imports: [     
     MongooseModule.forRoot('mongodb://localhost/nest-mongodb-crud'),
-    DoctorsModule
+    DoctorsModule,
   ],
   controllers: [],
   providers: [],

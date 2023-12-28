@@ -1,14 +1,20 @@
 import { Get, Post, Put, Controller, Delete, Param, Query, Body, ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { DoctorService } from '../services/doctor.service';
+import { PasswordService } from '../services/password.service';
 import { doctorDto } from '../dto/doctors.dto';
 import { Doctor } from '../doctor-schema/doctor-schema';
 
 @Controller('Doctor')
 export class DoctorController {
-    constructor (private DoctorService: DoctorService) {}
+    constructor (
+        private DoctorService: DoctorService,
+        private PasswordService: PasswordService,
+    ) {}
 
     @Post("/add_doctor")
     async addDoctor (@Body(new ValidationPipe()) createDocDto: doctorDto) : Promise <Doctor> {
+        const hashPassword = await this.PasswordService.hashPassword(createDocDto.password);
+        createDocDto.password = hashPassword;
         return await this.DoctorService.addDoctors(createDocDto);
     }
 

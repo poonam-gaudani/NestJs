@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { doctorDto } from '../dto/doctors.dto'
-import { Doctor, DoctorSchema } from '../doctor-schema/doctor-schema'
+import { Doctor } from '../doctor-schema/doctor-schema'
 
 @Injectable()
 export class DoctorService {

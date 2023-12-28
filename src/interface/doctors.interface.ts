@@ -1,5 +1,6 @@
 export interface DoctorInterface {
     id: number,
     name: String,
-    email: String
+    email: String,
+    password: String
 }

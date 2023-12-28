@@ -12,4 +12,11 @@ export class doctorDto{
 
     @IsString() @IsEmail()
     email: String;
+
+    @IsString() @MinLength(6, {
+        message: `Password must $value of $property $constraint1`
+    }) @MaxLength(30, {
+        message: `Password must $value of $property $constraint1`
+    })
+    password: String;
 }

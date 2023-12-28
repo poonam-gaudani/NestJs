@@ -8,6 +8,9 @@ export class Doctor extends Document {
 
     @Prop()
     readonly  email: string;
+
+    @Prop()
+    readonly password: string;
 }
 
 export const DoctorSchema = SchemaFactory.createForClass(Doctor);
